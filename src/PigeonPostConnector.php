@@ -91,7 +91,18 @@ final readonly class PigeonPostConnector implements Backfills, Connector, Discov
         $lastRing = null;
 
         foreach (self::DISPATCHES[$loft] as $dispatch) {
-            $this->submitter->submit($this->envelopeFor($loft, $installation, $dispatch));
+            $record = $this->submitter->submit(
+                $this->envelopeFor($loft, $installation, $dispatch),
+            );
+
+            if (! $record->isAuthoritative()) {
+                return OperationResult::failed(sprintf(
+                    'Funes did not accept ring [%s]: %s',
+                    $dispatch['ring'],
+                    $record->submission->error ?? $record->submission->status->value,
+                ));
+            }
+
             $accepted++;
             $lastRing = $dispatch['ring'];
         }
