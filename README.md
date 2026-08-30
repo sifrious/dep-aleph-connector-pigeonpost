@@ -1,5 +1,9 @@
 # aleph-connector-pigeonpost
 
+> **License:** Copyright © 2026 Sifrious. All rights reserved. This is
+> publicly viewable proprietary software, not open-source software. See
+> [LICENSE.md](LICENSE.md).
+
 A deliberately odd sample connector proving the Aleph plugin boundary (MME-850 / A38).
 
 It models a pigeon courier network — lofts that receive ring-numbered dispatches — precisely
